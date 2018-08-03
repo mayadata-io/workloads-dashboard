@@ -1,0 +1,31 @@
+<div class="p-md-5">
+  <span class="head-text text-default">Thank you for your interest in MayaData products.</span>
+  <p class="text-gray-3 mt-md-2">Please fill in the following details, one of our team members will get back to you with more information </p>
+  <form novalidate [formGroup]="leadForm" (ngSubmit)="formSubmit()">
+    <div class="form">
+      <div class="form-group">
+        <input type="text" class="form-control" [ngClass]="{
+        'valid_input':name.valid && (name.touched || name.dirty),
+        'invalid_input':name.invalid && (name.touched || name.dirty || isFormEmpty)
+        }" placeholder="Name" id="name" formControlName="name" required>
+        <div class="form-control-feedback" *ngIf="name.errors && (name.touched || name.dirty || isFormEmpty)">
+          <p class="text-danger" *ngIf="name.errors.required">*Name is required</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" [ngClass]="{
+        'valid_input':email.valid && (email.touched || email.dirty),
+        'invalid_input':email.invalid && (email.touched || email.dirty || isFormEmpty)
+        }" placeholder="Email address" id="email" formControlName="email" required>
+        <div class="form-control-feedback" *ngIf="email.errors && (email.touched || email.dirty || isFormEmpty)">
+          <p class="text-danger" *ngIf="email.errors.required">*Email is required</p>
+          <p class="text-danger" *ngIf="email.errors.pattern">Email is not of correct format</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Company Name" formControlName="companyname" id="company">
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Contact me</button>
+    </div>
+  </form>
+</div>
