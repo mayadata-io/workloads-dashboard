@@ -14,5 +14,3 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=mayadata/www-mongo-jiva-test-openebs;
    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
   fi
-- if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" != "false" ]; then docker build -t mongo-test:$TRAVIS_BRANCH-$COMMIT . 
-  fi

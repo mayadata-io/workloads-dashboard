@@ -6,11 +6,13 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { FormService } from './components/form/form.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent
+    FormComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
