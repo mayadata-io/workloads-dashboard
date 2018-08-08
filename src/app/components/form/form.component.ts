@@ -34,7 +34,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.createForm();
 
     timer(0, 100000).subscribe(x => {
-      console.log(Math.floor(Math.random() * 10000000));
+      // console.log(Math.floor(Math.random() * 10000000));
       var rnumber = Math.floor(Math.random() * 10000000)
       // this.agileServices.addPost(this.leadForm.value.name,this.leadForm.value.email, this.leadForm.value.companyname,this.mdTag);
       this.agileServices.addRandomDetails(rnumber, 'fd');
