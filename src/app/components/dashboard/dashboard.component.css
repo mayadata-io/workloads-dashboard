@@ -1,0 +1,7 @@
+.hero-section{
+ background: url(/assets/images/background.png) no-repeat;
+ background-size: cover;   
+}
+li{
+    list-style: none;
+}
