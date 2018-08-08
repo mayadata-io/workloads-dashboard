@@ -32,7 +32,7 @@ export class FormService {
   getPosts() {
     this.http
       .get<{ message: string; posts: contactDetails[] }>(
-        "http://localhost:3000/sample/users"
+        this.apiurl+"sample/users"
       )
       .subscribe(postData => {
         this.contactAdd = postData.posts;
@@ -47,7 +47,7 @@ export class FormService {
   addPost(firstName:string, emailId: string, companyName: string,addtag: string) {
     const contactAdd: contactDetails = { name: firstName, email: emailId, company: companyName,tag: addtag };
     this.http
-      .post<{ message: string }>("http://localhost:3000/sample/users", contactAdd)
+      .post<{ message: string }>(this.apiurl+"sample/users", contactAdd)
       .subscribe(responseData => {
         this.contactAdd.push(contactAdd);
       });
@@ -56,7 +56,7 @@ export class FormService {
   addRandomDetails(randomNumber:number, randomString: string) {
     const randomAdd: randomDetails = { rNumer: randomNumber, rString: randomString};
     this.http
-      .post<{ message: string }>("http://localhost:3000/sample/detail", randomAdd)
+      .post<{ message: string }>(this.apiurl+"sample/detail", randomAdd)
       .subscribe(responseData => {
         this.randomAdd.push(randomAdd);
         // this.contactUpdated.next([...this.contactAdd]);
