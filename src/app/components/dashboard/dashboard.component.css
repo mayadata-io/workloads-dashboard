@@ -5,3 +5,9 @@
 li{
     list-style: none;
 }
+.valid_input{
+    border-color:green; 
+}
+.invalid_input{
+    border-color:red; 
+}

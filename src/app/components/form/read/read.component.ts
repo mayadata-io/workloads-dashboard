@@ -1,19 +1,19 @@
 import { Component, OnInit, Output, EventEmitter, NgModule, Pipe, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, MinLengthValidator } from '@angular/forms';
 import { Subscription, Observable, timer } from 'rxjs';
-import { contactDetails } from './form.model';
-import { FormService } from './form.service';
+import { contactDetails } from '../form.model';
+import { FormService } from '../form.service';
 import { take } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-read',
+  templateUrl: './read.component.html',
+  styleUrls: ['../form.component.css']
+
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class ReadComponent implements OnInit {
 
-
+ 
   leadForm: FormGroup;
   name: FormControl;
   email: FormControl;
@@ -68,6 +68,5 @@ export class FormComponent implements OnInit, OnDestroy {
       this.isFormEmpty = true;
     }
   }
-
 
 }

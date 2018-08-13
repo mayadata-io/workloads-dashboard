@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-between">
+  <form novalidate [formGroup]="leadForm" (ngSubmit)="formSubmit()">
+    <div class="form-inline">
+      <div class="form-group flex-column justify-content-start">
+        <input type="text" class="form-control mr-md-2" [ngClass]="{
+        'valid_input':name.valid && (name.touched || name.dirty),
+        'invalid_input':name.invalid && (name.touched || name.dirty || isFormEmpty)
+        }" placeholder="Name" id="name" formControlName="name" required>
+        <div class="form-control-feedback" *ngIf="name.errors && (name.touched || name.dirty || isFormEmpty)">
+          <p class="invalid-tooltip" *ngIf="name.errors.required">*Name is required</p>
+        </div>
+      </div>
+      <button type="submit" class="btn">Delete</button>
+    </div>
+  </form>
+  <button type="button" class="btn btn-success ">Success</button>
+</div>

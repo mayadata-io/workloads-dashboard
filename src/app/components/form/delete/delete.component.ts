@@ -1,32 +1,28 @@
 import { Component, OnInit, Output, EventEmitter, NgModule, Pipe, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, MinLengthValidator } from '@angular/forms';
 import { Subscription, Observable, timer } from 'rxjs';
-import { contactDetails } from './form.model';
-import { FormService } from './form.service';
+import { contactDetails } from '../form.model';
+import { FormService } from '../form.service';
 import { take } from 'rxjs/operators';
-
+import { PersonService } from '../../../service/savereaddelete.service';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['../form.component.css']
+
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class DeleteComponent implements OnInit {
 
-
+ 
   leadForm: FormGroup;
   name: FormControl;
-  email: FormControl;
-  companyname: FormControl;
   isFormEmpty: boolean = false;
-  setFormChange: boolean = false;
-  mdTag: string = 'MDMainPage';
   count = 100;
 
   posts: contactDetails[] = [];
   private postsSub: Subscription;
-  constructor(private agileServices: FormService) {
-
+  constructor(private personService: PersonService) {
   }
 
   ngOnInit() {
@@ -40,34 +36,28 @@ export class FormComponent implements OnInit, OnDestroy {
       // this.agileServices.addRandomDetails(rnumber, 'fd');
     });
   }
-  ngOnDestroy() {
-    this.postsSub.unsubscribe();
-  };
-
 
   createFormControls() {
     this.name = new FormControl('', Validators.required);
-    this.email = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
-    this.companyname = new FormControl();
   }
 
   createForm() {
     this.leadForm = new FormGroup({
       name: this.name,
-      email: this.email,
-      companyname: this.companyname
     });
   }
 
   formSubmit() {
 
-    if (this.name.errors == null && this.email.errors == null) {
-      this.agileServices.addPost(this.leadForm.value.name, this.leadForm.value.email, this.leadForm.value.companyname, this.mdTag);
+    if (this.name.errors == null) {
+      // this.agileServices.addPost(this.leadForm.value.name, this.leadForm.value.email, this.leadForm.value.companyname, this.mdTag);
+     console.log(this.leadForm.value.name);
+     this.personService.deletePerson(this.leadForm.value.name);
+   
     }
-    if (this.name.errors || this.email.errors) {
+    if (this.name.errors) {
       this.isFormEmpty = true;
     }
   }
-
 
 }
