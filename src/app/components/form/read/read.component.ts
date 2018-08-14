@@ -12,7 +12,7 @@ import { PersonService } from '../../../service/savereaddelete.service'
 })
 export class ReadComponent implements OnInit {
 
-  private persons;
+  persons;
   constructor(private personService: PersonService) {
 
   }
