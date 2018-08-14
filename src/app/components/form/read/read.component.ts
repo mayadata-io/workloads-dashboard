@@ -23,12 +23,8 @@ export class ReadComponent implements OnInit {
   }
   readData(){
     this.personService.getpersonDetails().subscribe(data =>{
-      console.log(data);
       this.persons = data;
     });
-    // console.log(this.person);
-
-    console.log("this");
   }
 
 }

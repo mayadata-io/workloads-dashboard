@@ -99,16 +99,10 @@ export class PersonService {
       // });
   }
   getJivaVolumeDetails() {
-    this.http
+   return this.http
       .get(
         this.apiurl+"jiva/"
-      )
-      .subscribe(responseData => {
-        // this.personDetails = responseData.posts
-        // this.contactUpdated.next([...this.contactAdd]);
-        console.log(responseData);
-        return responseData;
-      });
+      );
   }
 
 }

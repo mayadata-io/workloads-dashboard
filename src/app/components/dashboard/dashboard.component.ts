@@ -7,12 +7,15 @@ import { PersonService } from '../../service/savereaddelete.service'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-private jivaDetail
+ jivaDetail
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
-    this.jivaDetail = this.personService.getJivaVolumeDetails();
-    console.log(this.jivaDetail);
+    this.personService.getJivaVolumeDetails().subscribe( res => {
+      this.jivaDetail = res
+      console.log(this.jivaDetail);
+    });
+  
   }
 
 }
