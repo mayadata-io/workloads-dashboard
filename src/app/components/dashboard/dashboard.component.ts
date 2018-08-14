@@ -14,6 +14,12 @@ export class DashboardComponent implements OnInit {
     this.personService.getJivaVolumeDetails().subscribe( res => {
       this.jivaDetail = res
       console.log(this.jivaDetail);
+      console.log('this is data')
+      console.log(this.jivaDetail.data);
+      console.log('this is item')
+      console.log(this.jivaDetail.data.items);
+      console.log('this is metad data')
+      console.log(this.jivaDetail.data.items[0]);
     });
   
   }
