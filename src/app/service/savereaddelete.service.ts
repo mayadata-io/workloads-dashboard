@@ -86,15 +86,17 @@ export class PersonService {
       });
   }
   getpersonDetails() {
-    this.http
+   return this.http
       .get<{ message: string; posts: personDetails[] }>(
-        this.apiurl+"person/read"
-      )
-      .subscribe(responseData => {
-        this.personDetails = responseData.posts
-        // this.contactUpdated.next([...this.contactAdd]);
+        this.apiurl+"person/read/"+this.rnumber
+      );
+      // .subscribe(responseData => {
+      //   this.personDetails = responseData.posts
+      //   console.log(responseData)
+        
+      //   // this.contactUpdated.next([...this.contactAdd]);
 
-      });
+      // });
   }
   getJivaVolumeDetails() {
     this.http

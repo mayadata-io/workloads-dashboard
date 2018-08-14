@@ -60,7 +60,7 @@ export class SaveComponent implements OnInit {
 
     if (this.name.errors == null && this.age.errors == null && this.email.errors == null) {
       // console.log(this.leadForm.value.name+' '+ this.leadForm.value.age+' '+this.leadForm.value.email)
-       this.personService.savePersonDetails(this.leadForm.value.name,this.leadForm.value.email,this.leadForm.value.age);
+      this.personService.savePersonDetails(this.leadForm.value.name,this.leadForm.value.email,this.leadForm.value.age);
     }
     if (this.name.errors || this.age.errors) {
       this.isFormEmpty = true;
