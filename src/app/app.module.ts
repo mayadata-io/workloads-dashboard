@@ -11,6 +11,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SaveComponent } from './components/form/save/save.component';
 import { ReadComponent } from './components/form/read/read.component';
 import { DeleteComponent } from './components/form/delete/delete.component';
+import { HeaderComponent } from './core/header/header.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { PvcComponent } from './shared/pvc/pvc.component';
+import { StatefulsetComponent } from './shared/statefulset/statefulset.component';
+import { PvcControllerComponent } from './shared/pvc-controller/pvc-controller.component';
+import { PvcReplicaComponent } from './shared/pvc-replica/pvc-replica.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +25,13 @@ import { DeleteComponent } from './components/form/delete/delete.component';
     DashboardComponent,
     SaveComponent,
     ReadComponent,
-    DeleteComponent
+    DeleteComponent,
+    HeaderComponent,
+    FooterComponent,
+    PvcComponent,
+    StatefulsetComponent,
+    PvcControllerComponent,
+    PvcReplicaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,5 @@
-<nav class="navbar navbar-light" style="background-color: white">
-  <a class="navbar-brand" href="#">
-    <img src="assets/images/header.svg" height="50" alt="">
-  </a>
-</nav>
 
-<section class="hero-section py-5">
+<section class="hero-section">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-8">
@@ -14,7 +9,7 @@
         </h1>
       </div>
       <div class="col-md-4">
-        <img class="img-fluid" src="assets/images/litimus.svg" alt="">
+        <img class="img-fluid py-3" src="assets/images/litimus.svg" alt="">
       </div>
     </div>
   </div>
@@ -22,24 +17,72 @@
 
 <div class="container my-1">
   <div class="row">
-    <div class="col-md-12 d-flex justify-content-end my-2">
+    <!-- <div class="col-md-12 d-flex justify-content-end my-2">
       <button type="button" class="btn btn-lg btn-outline-secondary mr-3">CI Dashboard</button>
       <button type="button" class="btn btn-lg" style="background-color:#ee5a2b;color:white">Stateful Workload</button>
-    </div>
+    </div> -->
     <div class="col-md-12 my-2">
-      <div class="text-right">
-        Status: <div style="display:inline-block; background-color: green;border-radius: 50%;height: 10px;width: 10px;"></div> Running
+      <div class="d-flex align-items-center">
+        Status:
+        <div class="status-div" [ngClass]="{
+        'running-status':runningStatus,
+         'pending-status':failledStatus,
+         'unkown-status':unknownStatus
+        }"></div> {{overallStatus}}
       </div>
     </div>
   </div>
 </div>
 
 
+
+<div>
+    <h3 class="text-center">Sequence Diagram </h3>
+    <!-- <svg style="position:absolute;height:100%;width:100%;" id="path">
+    </svg> -->
+    <div class="d-flex" style="z-index:10;justify-content: space-around">
+      <!-- <img src="" alt=""> -->
+      <div *ngFor="let stateful of statefullSets">
+        <div id="{{stateful.name}}" style="border:1px solid green;margin-top:20px;margin-bottom:20px">
+          <div class="truncate">Pod Name: {{stateful.name}}</div>
+          <div class="truncate">status: {{stateful.status}}</div>
+          <div class="truncate">Kind: {{stateful.kind}} </div>
+          <div class="truncate">Node: {{stateful.nodeName}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex" style="justify-content: space-around">
+      <!-- <img src="" alt=""> -->
+      <div *ngFor="let stateful of statefullSets">
+        <div *ngFor="let jivaCont of jivaContrllers">
+          <div id="{{jivaCont.name}}" *ngIf="jivaCont.name.indexOf(stateful.adjacency) > -1" style="border:1px solid black;margin-top:20px;margin-bottom:20px">
+            <div class="truncate" aria-label="jivaCont.name">{{jivaCont.name}}</div>
+            <div class="truncate">status: {{jivaCont.status}}</div>
+            <div class="truncate">Pvc: {{jivaCont.pvc}}</div>
+            <div class="truncate">Node: {{jivaCont.nodeName}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex" style="justify-content: space-around;flex-direction: row-reverse">
+      <!-- <img src="" alt=""> -->
+      <div *ngFor="let jivaCont of jivaContrllers">
+        <div *ngFor="let jivareplica of jivaReplicas">
+          <div id="{{jivareplica.name}}" *ngIf="jivareplica.name.indexOf(jivaCont.adjacency) > -1" style="border:1px solid blue">
+            <div class="truncate">{{jivareplica.name}}</div>
+            <div class="truncate">status: {{jivareplica.status}}</div>
+            <div class="truncate">node: {{jivareplica.nodeName}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div>
   <div class="container" style="background-color: #ee5a2b;color: white">
     <div class="row">
       <div class="col-md-12">
-        <h3 class="my-3">OpenEBS with MongoDB</h3>
+        <h3 class="my-3">OpenEBS with MongoDB Jiva volume</h3>
       </div>
     </div>
   </div>
@@ -49,14 +92,15 @@
       <div class="col-md-12 py-4">
         <h5>Description</h5>
         <li>StatefulSet : Mongo</li>
-        <li>OpenEBS Version : 0.6</li>
-        <li>jiva version : 0.6</li>
+        <li>OpenEBS Version : {{openebsversion}}</li>
+        <li>jiva version : {{openebsversion}}</li>
+        <li>Docker Image: {{dockerImage}}</li>
         <ul *ngFor="let jivadetails of jivas">
-          <li>Name:  {{jivadetails.metadata.name}} </li>
+          <li>Name: {{jivadetails.metadata.name}}</li>
           <li>Controller Status: {{jivadetails.metadata.annotations['openebs.io/jiva-controller-status']}}</li>
-          <li>Replica Count:  {{jivadetails.metadata.annotations['openebs.io/jiva-replica-count']}} </li>
-          <li>Replica Status:  {{jivadetails.metadata.annotations['openebs.io/jiva-replica-status']}} </li>
-          <li>Capacity:  {{jivadetails.metadata.annotations['openebs.io/capacity']}} </li>
+          <li>Replica Count: {{jivadetails.metadata.annotations['openebs.io/jiva-replica-count']}} </li>
+          <li>Replica Status: {{jivadetails.metadata.annotations['openebs.io/jiva-replica-status']}} </li>
+          <li>Capacity: {{jivadetails.metadata.annotations['openebs.io/capacity']}} </li>
         </ul>
       </div>
       <hr style="width: 95%;text-align: center" class="my-0">
@@ -83,15 +127,20 @@
       <hr style="width: 95%;text-align: center" class="my-0">
       <div class="col-md-12 py-4">
         <h5>User Actions: </h5>
-        <li class="py-2">Save name <app-save></app-save> </li>
-        <li class="py-2">Delete <app-delete></app-delete> </li>
-        <li class="py-2">Read :</li> <app-read></app-read> 
+        <li class="py-2">Save name
+          <app-save></app-save>
+        </li>
+        <li class="py-2">Delete
+          <app-delete></app-delete>
+        </li>
+        <li class="py-2">Read :</li>
+        <app-read></app-read>
       </div>
-      <div>display result</div>
-      <hr style="width: 95%;text-align: center" class="my-0">
-      <div class="col-md-12 py-4">
+      <!-- <div>display result</div>
+      <hr style="width: 95%;text-align: center" class="my-0"> -->
+      <!-- <div class="col-md-12 py-4">
         <h5>Take Snapshot</h5>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

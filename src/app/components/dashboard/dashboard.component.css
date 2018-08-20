@@ -4,10 +4,34 @@
 }
 li{
     list-style: none;
+    color: black;
 }
 .valid_input{
     border-color:green; 
 }
 .invalid_input{
     border-color:red; 
+}
+.truncate {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.status-div{
+  height:15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+.running-status{
+  background-color: green;
+}
+.pending-status{
+  background-color: yellow;
+}
+.unkown-status{
+  background: gray;
 }

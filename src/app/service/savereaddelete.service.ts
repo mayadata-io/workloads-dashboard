@@ -5,6 +5,8 @@ import { Subject } from "rxjs";
 import { contactDetails } from "../components/form/form.model";
 import { randomDetails } from "../components/form/random.model";
 import { personDetail, deletePerson, personDetails } from "../model/data.model"
+import { overAllStatus } from "../model/data.model";
+
 
 @Injectable()
 
@@ -103,6 +105,13 @@ export class PersonService {
       .get(
         this.apiurl+"jiva/"
       );
+  }
+
+  getPodDetails(){
+    return this.http
+    .get<overAllStatus>(
+      this.apiurl+"pods/sequence"
+    )
   }
 
 }
