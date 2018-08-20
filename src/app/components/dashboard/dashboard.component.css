@@ -13,7 +13,7 @@ li{
     border-color:red; 
 }
 .truncate {
-    width: 200px;
+    width: 270px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
