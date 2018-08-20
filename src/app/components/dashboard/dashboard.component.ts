@@ -14,17 +14,17 @@ export class DashboardComponent implements OnInit {
   jivaDetail;
   jivas;
   private windowWidth;
-  private statefullSets: statefulSet[] = [];
-  private jivaContrllers: jivaController[] = [];
-  private jivaReplicas: jivaReplica[] = [];
-  private applicationPods: applicationPod[] = [];
-  private overAllStatus: overAllStatus[] = [];
-  private dockerImage = "";
-  private openebsversion = "";
-  private overallStatus = "";
-  runningStatus = false;
-  failledStatus = false;
-  unknownStatus = false;
+  public statefullSets: statefulSet[] = [];
+  public jivaContrllers: jivaController[] = [];
+  public jivaReplicas: jivaReplica[] = [];
+  public applicationPods: applicationPod[] = [];
+  public overAllStatus: overAllStatus[] = [];
+  public dockerImage = "";
+  public openebsversion = "";
+  public overallStatus = "";
+  public runningStatus = false;
+  public failledStatus = false;
+  public unknownStatus = false;
   constructor(private personService: PersonService) {
     this.windowWidth = window.innerWidth
   }
