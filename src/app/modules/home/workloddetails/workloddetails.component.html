@@ -1,0 +1,140 @@
+<div class="bg-strip workload-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="d-flex align-items-center">
+          <li><img src="assets/images/mongodb-logo.png" alt="">Mongo 3.1</li>
+          <li><img src="assets/images/mule-without-tagline.png" alt="">{{openebsversion}}</li>
+          <li><img src="assets/images/k8s.png" alt="">Namespace:{{namespace}}</li>
+          <li>last Update:10 minute ago</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-around workloads my-5">
+      <div class="workload-deatils" *ngFor="let pvc of pvc.pvc">
+        <div *ngFor="let statefulset of statefullSets">
+          <p *ngIf="statefulset.pvc === pvc.name ">
+            <img src="assets/images/mongodb-logo.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}"> {{statefulset.name}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span> <i style="margin-left:5px"
+              class="float-right fas" [ngClass]="{
+          'fa-check text-success':statefulset.status === 'Running',   
+          'fa-times text-danger':statefulset.status === 'Pending' || statefulset.status === 'Failed',
+          'fa-exclamation-triangle text-warning':statefulset.status === 'Unknown'
+        }"></i>
+      </p>
+        </div>
+        <div *ngFor="let jivaContrller of jivaContrllers">
+          <p *ngIf="jivaContrller.pvc === pvc.name"> 
+            <img src="assets/images/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom" ngbTooltip="{{jivaContrller.name}}">cntl</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i style="margin-left:5px" class="float-right fas"
+              [ngClass]="{
+        'fa-check text-success':jivaContrller.status === 'Running',   
+        'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
+        'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
+      }"></i>
+          </p>
+        </div>
+        <div *ngFor="let jivaReplica of jivaReplicas">
+          <p *ngIf="jivaReplica.pvc === pvc.name">
+            <img src="assets/images/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span> on  <span placement="bottom" ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span><i style="margin-left:5px" class="float-right fas"
+              [ngClass]="{
+          'fa-check text-success':jivaReplica.status === 'Running',
+          'fa-times text-danger':jivaReplica.status === 'Pending' || jivaReplica.status === 'Failed',
+          'fa-exclamation-triangle text-warning':jivaReplica.status === 'Unknown'
+        }"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-strip configuration-header">
+  <div class="container">
+    <div claas="row">
+      <div class="col-md-12">
+        <ul class="d-flex align-items-center">
+          <li>Configurations File</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="Configurations">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+            <tr class="d-flex justify-content-between">
+              <td>Namespace</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td>Mongo Statefulset</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+            </tr>
+            <!-- <tr>
+              <td>Nodejs Application</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td>OpenEBS Operator</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+            </tr>
+            <tr>
+              <td>StorageClass</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td>Mongo Statefulset</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+            </tr>
+            <tr>
+              <td>ingress</td>
+              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-strip configuration-header">
+    <div class="container">
+      <div claas="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between">
+            <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary float-right" (click)="listVolume()">Execute <img src="assets/images/down-left.png" alt="" height="20px"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-between">
+        <table class="table" *ngFor="let volume of jivas">
+          <tr>
+            <td>Volume Name:</td>
+            <td>{{volume.metadata.name}}</td>
+          </tr>
+          <tr>
+            <td>Controller Status:</td>
+            <td>{{volume.metadata.annotations['openebs.io/jiva-controller-status']}}</td>
+          </tr>
+          <tr>
+            <td>Replica Count:</td>
+            <td>{{volume.metadata.annotations['openebs.io/jiva-replica-count']}}</td>
+          </tr>
+          <tr>
+            <td>Replica status:</td>
+            <td>{{volume.metadata.annotations['openebs.io/jiva-replica-status']}}</td>
+          </tr>
+          <tr>
+            <td>Capacity:</td>
+            <td>{{volume.metadata.annotations['openebs.io/capacity']}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>

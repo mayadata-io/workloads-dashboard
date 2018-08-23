@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PvcReplicaComponent } from './pvc-replica.component';
+import { HeroComponent } from './hero.component';
 
-describe('PvcReplicaComponent', () => {
-  let component: PvcReplicaComponent;
-  let fixture: ComponentFixture<PvcReplicaComponent>;
+describe('HeroComponent', () => {
+  let component: HeroComponent;
+  let fixture: ComponentFixture<HeroComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PvcReplicaComponent ]
+      declarations: [ HeroComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PvcReplicaComponent);
+    fixture = TestBed.createComponent(HeroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

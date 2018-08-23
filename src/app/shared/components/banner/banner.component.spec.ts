@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatefulsetComponent } from './statefulset.component';
+import { BannerComponent } from './banner.component';
 
-describe('StatefulsetComponent', () => {
-  let component: StatefulsetComponent;
-  let fixture: ComponentFixture<StatefulsetComponent>;
+describe('BannerComponent', () => {
+  let component: BannerComponent;
+  let fixture: ComponentFixture<BannerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatefulsetComponent ]
+      declarations: [ BannerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatefulsetComponent);
+    fixture = TestBed.createComponent(BannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

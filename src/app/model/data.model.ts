@@ -54,6 +54,14 @@ export interface applicationPod {
     status: string,
     dockerImage: string
 }
+export interface pvc {
+    numberofPvc: number,
+    pvc: [{
+        name: string,
+        volumeName: string
+    }]
+
+}
 export interface overAllStatus {
     status: string
     statefulSet: [{
@@ -94,10 +102,18 @@ export interface overAllStatus {
         nodeName: string,
         status: string,
         dockerImage: string
+    }],
+    pvc: [{
+        numberofPvc: number,
+        pvc: [{
+            name: string,
+            volumeName: string
+        }]
     }]
+
 }
-export interface link{
-    id:string,
-    x:number,
-    y:number
+export interface link {
+    id: string,
+    x: number,
+    y: number
 }

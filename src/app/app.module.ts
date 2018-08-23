@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
@@ -13,10 +14,11 @@ import { ReadComponent } from './components/form/read/read.component';
 import { DeleteComponent } from './components/form/delete/delete.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { PvcComponent } from './shared/pvc/pvc.component';
-import { StatefulsetComponent } from './shared/statefulset/statefulset.component';
-import { PvcControllerComponent } from './shared/pvc-controller/pvc-controller.component';
-import { PvcReplicaComponent } from './shared/pvc-replica/pvc-replica.component';
+import { BannerComponent } from './shared/components/banner/banner.component';
+import { HomeComponent } from './modules/home/home.component';
+import { HeroComponent } from './modules/home/hero/hero.component';
+import { WorkloddetailsComponent } from './modules/home/workloddetails/workloddetails.component';
+import { DatabasequeryComponent } from './modules/home/databasequery/databasequery.component';
 
 @NgModule({
   declarations: [
@@ -28,16 +30,18 @@ import { PvcReplicaComponent } from './shared/pvc-replica/pvc-replica.component'
     DeleteComponent,
     HeaderComponent,
     FooterComponent,
-    PvcComponent,
-    StatefulsetComponent,
-    PvcControllerComponent,
-    PvcReplicaComponent
-  ],
+    BannerComponent,
+    HomeComponent,
+    HeroComponent,
+    WorkloddetailsComponent,
+    DatabasequeryComponent
+   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [FormService, PersonService, HttpClient],
   bootstrap: [AppComponent]
