@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   public heroTexts = {
     heroText: "Workload Dashboard",
     subText: [
-       "Status of stateful workload runnig on OpenEBS Volumes"
+       "Status of stateful workload running on OpenEBS Volumes"
     ]
   };
   constructor() { }
