@@ -17,7 +17,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 d-flex justify-content-around workloads my-5">
-      <div class="workload-deatils" *ngFor="let pvc of pvc.pvc">
+      <div class="workload-deatils" *ngFor="let pvc of pvcarray">
         <div *ngFor="let statefulset of statefullSets">
           <p *ngIf="statefulset.pvc === pvc.name ">
             <img src="assets/images/mongodb-logo.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}"> {{statefulset.name}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span> <i style="margin-left:5px"

@@ -20,6 +20,8 @@ export class WorkloddetailsComponent implements OnInit {
   public applicationPods: applicationPod[] = [];
   public overAllStatus: overAllStatus[] = [];
   public pvc: pvc[] = [];
+  public pvctemp; 
+  public pvcarray;
   public namespace = "";
   public dockerImage = "";
   public openebsversion = "";
@@ -47,7 +49,13 @@ export class WorkloddetailsComponent implements OnInit {
         this.jivaContrllers = res.jivaController;
         this.jivaReplicas = res.jivaReplica;
         this.pvc = res.pvc;
-        console.log(res.pvc);
+        this.pvctemp=res.pvc
+        this.pvcarray = this.pvctemp.pvc
+        console.log(this.pvcarray);
+
+        
+        // console.log(res.pvc);
+        // console.log(res);
         // console.log(this.pvcDetail +'hgvhjgvkhgvkhvkjhvkjh');
         this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
         this.openebsversion = 'OpenEBS:' + this.jivaContrllers[0].openebsjivaversion.split(":")[1];
