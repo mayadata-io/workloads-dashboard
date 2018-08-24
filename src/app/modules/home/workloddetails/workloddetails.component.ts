@@ -40,7 +40,7 @@ export class WorkloddetailsComponent implements OnInit {
     //   // console.log(this.jivaDetail.data.items[0]);
     // });
 
-    // timer(0, 10000).subscribe(x => {
+    timer(0, 10000).subscribe(x => {
 
       this.personService.getPodDetails().subscribe(res => {
         console.log(res);
@@ -76,7 +76,7 @@ export class WorkloddetailsComponent implements OnInit {
         }
 
       })
-    // });
+    });
 
   }
   public listVolume() {
