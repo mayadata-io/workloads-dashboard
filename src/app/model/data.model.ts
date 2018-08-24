@@ -4,6 +4,23 @@ export interface personDetail {
     email: string;
     age: number;
 }
+export interface getResponse {
+    u: [{
+        rNumber: number;
+        name: string;
+        email: string;
+        age: number;
+        id:string
+    }],
+    status: number,
+    message: string
+}
+export interface postResponse {
+    status: number,
+    message: string
+}
+
+
 export interface deletePerson {
     rNumber: number;
     name: string;

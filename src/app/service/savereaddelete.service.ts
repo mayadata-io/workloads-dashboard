@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 
 import { contactDetails } from "../components/form/form.model";
 import { randomDetails } from "../components/form/random.model";
-import { personDetail, deletePerson, personDetails } from "../model/data.model"
+import { personDetail, deletePerson, personDetails,getResponse,postResponse } from "../model/data.model"
 import { overAllStatus } from "../model/data.model";
 
 
@@ -71,6 +71,27 @@ export class PersonService {
       });
   }
 
+
+  save100PersonDetails(allDetails){
+    const saveDetails: personDetail = allDetails;
+   return this.http
+      .post<postResponse>(this.apiurl+"person/save1", saveDetails);
+      // .subscribe(responseData => {
+      //   this.saveDetails.push(saveDetails);
+      // });
+  }
+  // get100personDetails(num:number) {
+  //   return this.http
+  //      .get<{ message: string; posts: personDetails[] }>(
+  //        this.apiurl+"person/read/"+num
+  //      );
+  //  }
+   get100personDetails(num:number) {
+    return this.http
+       .get<getResponse>(
+         this.apiurl+"person/read/"+num
+       );
+   }
   savePersonDetails(name:string, email:string, age:number,){
     const saveDetails: personDetail = { rNumber: this.rnumber ,name: name, email:email, age:age};
     this.http

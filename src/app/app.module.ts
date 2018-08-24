@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Response,RequestOptions,Headers,Http } from '@angular/http';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,6 +20,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { HeroComponent } from './modules/home/hero/hero.component';
 import { WorkloddetailsComponent } from './modules/home/workloddetails/workloddetails.component';
 import { DatabasequeryComponent } from './modules/home/databasequery/databasequery.component';
+import { IframemodalComponent } from './shared/components/iframemodal/iframemodal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { DatabasequeryComponent } from './modules/home/databasequery/databaseque
     HomeComponent,
     HeroComponent,
     WorkloddetailsComponent,
-    DatabasequeryComponent
+    DatabasequeryComponent,
+    IframemodalComponent
    ],
   imports: [
     BrowserModule,
