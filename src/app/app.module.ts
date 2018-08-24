@@ -4,6 +4,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Response,RequestOptions,Headers,Http } from '@angular/http';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgwWowModule } from 'ngx-wow';
+import { RouterModule, RouterLinkActive } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
@@ -44,7 +46,11 @@ import { IframemodalComponent } from './shared/components/iframemodal/iframemoda
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgwWowModule.forRoot(),
+    RouterModule.forRoot([
+      {path:'',component:HeroComponent}
+    ])
   ],
   providers: [FormService, PersonService, HttpClient],
   bootstrap: [AppComponent]
