@@ -37,7 +37,7 @@ export class FormComponent implements OnInit, OnDestroy {
       // console.log(Math.floor(Math.random() * 10000000));
       var rnumber = Math.floor(Math.random() * 10000000)
       // this.agileServices.addPost(this.leadForm.value.name,this.leadForm.value.email, this.leadForm.value.companyname,this.mdTag);
-      this.agileServices.addRandomDetails(rnumber, 'fd');
+      // this.agileServices.addRandomDetails(rnumber, 'fd');
     });
   }
   ngOnDestroy() {

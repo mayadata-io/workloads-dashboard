@@ -1,0 +1,18 @@
+<button button class="btn" (click)="readData()">Read</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of persons">
+      <td>{{person.name}}</td>
+      <td>{{person.email}}</td>
+      <td>{{person.age}}</td>
+    </tr>
+  </tbody>
+</table>
