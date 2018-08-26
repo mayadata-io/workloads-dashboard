@@ -67,27 +67,42 @@
         <table class="table action-table">
           <tbody>
             <tr>
-              <td> Read Operations </td>
-              <td> <button class="btn btn-pill btn-secondary action-button btn-sm">
+              <td style="padding-left: 110px;"> Read Operations </td>
+              <td style="padding-left: 120px;"> <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
                   Go </button>
               </td>
-            </tr>
-            <tr>
-              <td> Write Operations </td>
-              <td> <button class="btn btn-secondary action-button btn-sm"> Go </button>
+              <td style="text-align: center;">
+                <div class="btn btn-pill action-button blink" [ngClass]="{
+                          'btn-success':getstatus===200,
+                          'btn-danger':getstatus===500
+                        }">{{getstatus}}
+                </div>
               </td>
             </tr>
             <tr>
-              <td> Induce Litmus Chaos </td>
-              <td>
+              <td style="padding-left: 110px;"> Write Operations </td>
+              <td style="padding-left: 120px;"> <button class="btn btn-secondary action-button btn-sm" (click)="save()">
+                  Go
+                </button>
+              </td>
+              <td style="text-align: center;">
+                <div class="btn btn-pill action-button" [ngClass]="{
+                            'btn-success':getstatus===200,
+                            'btn-danger':getstatus===500
+                          }">{{poststatus}}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-left: 110px;"> Induce Litmus Chaos </td>
+              <td style="padding-left: 120px;">
                 <div class="dropdown">
                   <button type="button" class="btn btn-secondary action-dropdown-button btn-sm dropdown-toggle" data-toggle="dropdown">
                     Go
                   </button>
                   <div class="dropdown-menu">
                     <div *ngFor="let statefulset of statefullSets">
-                      <a class="dropdown-item" href="#" (click)="runChaosTest(statefulset.name)"> {{ statefulset.name }}
-                        Replica </a>
+                      <a class="dropdown-item" (click)="runChaosTest(statefulset.name)"> {{ statefulset.name }} Replica </a>
                     </div>
                   </div>
                 </div>

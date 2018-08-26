@@ -102,6 +102,7 @@ export class PersonService {
   //        this.apiurl+"person/read/"+num
   //      );
   //  }
+
   get100personDetails(num: number) {
     return this.http.get<getResponse>(this.apiurl + "person/read/" + num);
   }
@@ -154,7 +155,7 @@ export class PersonService {
 
   runChaosTestService(app: string) {
     this.http
-      .get("https://mongojiva.test.openebs.io/sample/k8s/mongo?app=" + app)
+      .get("https://mongojiva.test.openebs.io/api/sample/k8s/mongo?app=" + app)
       .subscribe();
   }
 }
