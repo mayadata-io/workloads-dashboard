@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PersonService } from "../../../service/savereaddelete.service";
+import { personDetail } from "../../../model/data.model";
+import { getResponse, postResponse } from "../../../model/data.model";
 import {
   statefulSet,
   jivaReplica,
@@ -22,11 +24,15 @@ export class WorkloddetailsComponent implements OnInit {
   jivaDetail;
   jivas;
   private windowWidth;
+  private rnumber = Math.floor(Math.random() * 10000000);
   public statefullSets: statefulSet[] = [];
   public jivaContrllers: jivaController[] = [];
   public jivaReplicas: jivaReplica[] = [];
   public applicationPods: applicationPod[] = [];
   public overAllStatus: overAllStatus[] = [];
+  public postResponses: postResponse;
+  public getResponses: getResponse[] = [];
+  public personDetails: personDetail[] = [];
   public pvc: pvc[] = [];
   public pvctemp;
   public pvcarray;
@@ -37,6 +43,10 @@ export class WorkloddetailsComponent implements OnInit {
   public runningStatus = false;
   public failledStatus = false;
   public unknownStatus = false;
+  public getstatus;
+  public getmessage;
+  public poststatus;
+  public postmessage;
   constructor(private personService: PersonService) {
     this.windowWidth = window.innerWidth;
   }
@@ -91,6 +101,38 @@ export class WorkloddetailsComponent implements OnInit {
       this.jivaDetail = res;
       this.jivas = this.jivaDetail.data.items;
       // console.log(this.jivaDetail.data.items[0]);
+    });
+  }
+
+  public save() {
+    this.personService
+      .save100PersonDetails(this.personDetails)
+      .subscribe(res => {
+        console.log(res);
+        // console.log(res);
+        // console.log(res);
+        this.postResponses = res;
+        // this.postResponses=res.;
+        this.poststatus = this.postResponses.status;
+        this.postmessage = this.postResponses.message;
+      });
+  }
+  public read() {
+    this.personService.get100personDetails(this.rnumber).subscribe(res => {
+      // console.log(JSON.stringify(res.status));
+      // this.getResponses[0].status = res.status;
+      this.getResponses[0] = res;
+      // this.getResponses.message = res.message;
+      this.getstatus = this.getResponses[0].status;
+      this.getmessage = this.getResponses[0].message;
+      console.log(res.status);
+      // setTimeout(function() {
+      //   $(".blink")
+      //     .fadeTo(500, 0)
+      //     .slideUp(500, function() {
+      //       $(this).remove();
+      //     });
+      // }, 5000);
     });
   }
 
