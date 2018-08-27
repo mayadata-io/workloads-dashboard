@@ -68,7 +68,8 @@
           <tbody>
             <tr>
               <td style="padding-left: 110px;"> Read Operations </td>
-              <td style="padding-left: 120px;"> <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
+              <td style="padding-left: 120px;">
+                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
                   Go </button>
               </td>
               <td style="text-align: center;">
@@ -87,14 +88,14 @@
               </td>
               <td style="text-align: center;">
                 <div class="btn btn-pill action-button" [ngClass]="{
-                            'btn-success':getstatus===200,
-                            'btn-danger':getstatus===500
+                            'btn-success':poststatus===200,
+                            'btn-danger':poststatus===500
                           }">{{poststatus}}
                 </div>
               </td>
             </tr>
             <tr>
-              <td style="padding-left: 110px;"> Induce Litmus Chaos </td>
+              <td style="padding-left: 110px;"> Induce Chaos </td>
               <td style="padding-left: 120px;">
                 <div class="dropdown">
                   <button type="button" class="btn btn-secondary action-dropdown-button btn-sm dropdown-toggle" data-toggle="dropdown">
