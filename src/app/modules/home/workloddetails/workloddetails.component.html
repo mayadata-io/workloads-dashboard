@@ -39,7 +39,7 @@
                   ngbTooltip="{{jivaContrller.name}}">cntl</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
-            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed' || jivaReplica.status === 'Terminating',
+            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
             'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
           }"></i>
               </p>
