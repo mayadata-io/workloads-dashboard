@@ -43,6 +43,14 @@ export class WorkloddetailsComponent implements OnInit {
   public runningStatus = false;
   public failledStatus = false;
   public unknownStatus = false;
+  public chaosTests = [
+    "Kill OpenEBS Replica",
+    "Increase Latency Between App and Replicas"
+  ];
+  public selectedChaos = "";
+  public selectedApplication = "";
+  public writeStatus = false;
+  public readStatus = false;
   public alphabet = [
     "a",
     "b",
@@ -108,7 +116,11 @@ export class WorkloddetailsComponent implements OnInit {
       this.randomString2 = " ";
     }
 
-    timer(0, 10000).subscribe(x => {
+    if (this.selectedChaos == "") {
+      $(".hide-custom").hide();
+    }
+
+    timer(0, 5000).subscribe(x => {
       this.personService.getPodDetails().subscribe(res => {
         console.log(res);
         this.statefullSets = res.statefulSet;
@@ -119,6 +131,12 @@ export class WorkloddetailsComponent implements OnInit {
         this.pvctemp = res.pvc;
         this.pvcarray = this.pvctemp.pvc;
         console.log(this.pvcarray);
+
+        // this.jivaReplicas.forEach(function(replica) {
+        //   if (replica.status == "Terminating") {
+        //     setTimeout(function() {}, 8000);
+        //   }
+        // });
 
         // console.log(res.pvc);
         // console.log(res);
@@ -146,6 +164,7 @@ export class WorkloddetailsComponent implements OnInit {
       });
     });
   }
+
   public listVolume() {
     this.personService.getJivaVolumeDetails().subscribe(res => {
       this.jivaDetail = res;
@@ -165,7 +184,16 @@ export class WorkloddetailsComponent implements OnInit {
         // this.postResponses=res.;
         this.poststatus = this.postResponses.status;
         this.postmessage = this.postResponses.message;
+        this.writeStatus = true;
       });
+
+    setTimeout(
+      function() {
+        this.writeStatus = false;
+        // console.log(this.writeStatus);
+      }.bind(this),
+      5000
+    );
   }
   public read() {
     this.personService.get100personDetails(this.rnumber).subscribe(res => {
@@ -176,18 +204,38 @@ export class WorkloddetailsComponent implements OnInit {
       this.getstatus = this.getResponses[0].status;
       this.getmessage = this.getResponses[0].message;
       console.log(res.status);
-      // setTimeout(function() {
-      //   $(".blink")
-      //     .fadeTo(500, 0)
-      //     .slideUp(500, function() {
-      //       $(this).remove();
-      //     });
-      // }, 5000);
+      this.readStatus = true;
     });
+    setTimeout(
+      function() {
+        this.readStatus = false;
+        // console.log(this.writeStatus);
+      }.bind(this),
+      5000
+    );
   }
 
-  public runChaosTest(app: string) {
+  public onChaosSelect(chaosValue) {
+    // console.log(chaosValue);
+    this.selectedChaos = chaosValue;
+    if (this.selectedChaos != "") {
+      $(".hide-custom").show();
+    } else {
+      $(".hide-custom").hide();
+      this.selectedApplication = "";
+    }
+  }
+
+  public onAppSelect(appValue) {
+    this.selectedApplication = appValue;
+  }
+
+  public runChaosTest(chaos: string, app: string) {
+    // console.log(chaos);
     // console.log(app);
-    this.personService.runChaosTestService(app);
+    if (chaos != "" && app != "") {
+      // console.log("inside");
+      this.personService.runChaosTestService(chaos, app);
+    }
   }
 }

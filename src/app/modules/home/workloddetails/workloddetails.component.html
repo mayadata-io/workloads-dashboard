@@ -39,7 +39,7 @@
                   ngbTooltip="{{jivaContrller.name}}">cntl</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
-            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
+            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed' || jivaReplica.status === 'Terminating',
             'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
           }"></i>
               </p>
@@ -50,7 +50,7 @@
                   ngbTooltip="{{jivaReplica.name}}">Replica</span> on <span placement="bottom" ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
               'fa-check text-success':jivaReplica.status === 'Running',
-              'fa-times text-danger':jivaReplica.status === 'Pending' || jivaReplica.status === 'Failed',
+              'fa-times text-danger':jivaReplica.status === 'Pending' || jivaReplica.status === 'Failed' || jivaReplica.status === 'Terminating',
               'fa-exclamation-triangle text-warning':jivaReplica.status === 'Unknown'
             }"></i>
               </p>
@@ -67,45 +67,64 @@
         <table class="table action-table">
           <tbody>
             <tr>
-              <td style="padding-left: 110px;"> Read Operations </td>
-              <td style="padding-left: 120px;">
-                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
+              <td style="padding-left: 70px;">
+                <span placement="bottom" ngbTooltip="Generate random write operation on Mongo application">Write Operations</span>
+              </td>
+              <td style="padding-left: 240px;">
+                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="save()">
                   Go </button>
               </td>
               <td style="text-align: center;">
-                <div class="btn btn-pill action-button blink" [ngClass]="{
-                          'btn-success':getstatus===200,
-                          'btn-danger':getstatus===500
-                        }">{{getstatus}}
+                <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" ngbTooltip="{{postmessage}}" [ngClass]="{
+                          'btn-success':poststatus===200,
+                          'btn-danger':poststatus===500
+                        }">{{poststatus}}
                 </div>
               </td>
             </tr>
             <tr>
-              <td style="padding-left: 110px;"> Write Operations </td>
-              <td style="padding-left: 120px;"> <button class="btn btn-secondary action-button btn-sm" (click)="save()">
+              <td style="padding-left: 70px;">
+                <span placement="bottom" ngbTooltip="Perform read operation on Mongo application">Read Operations</span>
+              </td>
+              <td style="padding-left: 240px;">
+                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
                   Go
                 </button>
               </td>
               <td style="text-align: center;">
-                <div class="btn btn-pill action-button" [ngClass]="{
-                            'btn-success':poststatus===200,
-                            'btn-danger':poststatus===500
-                          }">{{poststatus}}
+                <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" ngbTooltip="{{getmessage}}" [ngClass]="{
+                            'btn-success':getstatus===200,
+                            'btn-danger':getstatus===500
+                          }">{{getstatus}}
                 </div>
               </td>
             </tr>
             <tr>
-              <td style="padding-left: 110px;"> Induce Chaos </td>
-              <td style="padding-left: 120px;">
-                <div class="dropdown">
-                  <button type="button" class="btn btn-secondary action-dropdown-button btn-sm dropdown-toggle" data-toggle="dropdown">
-                    Go
-                  </button>
-                  <div class="dropdown-menu">
-                    <div *ngFor="let statefulset of statefullSets">
-                      <a class="dropdown-item" (click)="runChaosTest(statefulset.name)"> {{ statefulset.name }} Replica </a>
-                    </div>
+              <td style="padding-left: 70px;"> Induce Chaos </td>
+              <td style="padding-left: 55px;">
+                <div class="row">
+                  <div>
+                    <select class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)" style="width:180px;">
+                      <option selected value="">Select Chaos..</option>
+                      <option *ngFor="let chaosTest of chaosTests " value="{{chaosTest}} "> {{chaosTest}} </option>
+                    </select>
                   </div>
+                  <div style="padding-left: 20px; ">
+                    <button class="btn btn-pill btn-secondary action-button btn-sm " (click)="runChaosTest(selectedChaos, selectedApplication) ">
+                      Go </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style="padding-left: 40px;">
+                <div>
+                  <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)" style="width:180px;">
+                    <option selected value="">Select Application..</option>
+                    <option *ngFor="let statefulset of statefullSets" value="{{statefulset.name}} "> {{statefulset.name}}
+                    </option>
+                  </select>
                 </div>
               </td>
             </tr>
@@ -115,11 +134,11 @@
     </div>
   </div>
 
-  <div class="bg-strip configuration-header">
-    <div class="container">
-      <div claas="row">
-        <div class="col-md-12">
-          <ul class="d-flex align-items-center">
+  <div class="bg-strip configuration-header ">
+    <div class="container ">
+      <div claas="row ">
+        <div class="col-md-12 ">
+          <ul class="d-flex align-items-center ">
             <li>Configurations File</li>
           </ul>
         </div>
@@ -127,35 +146,35 @@
     </div>
   </div>
 
-  <div class="Configurations">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table">
+  <div class="Configurations ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-md-12 ">
+          <table class="table ">
             <tbody>
-              <tr class="d-flex justify-content-between">
+              <tr class="d-flex justify-content-between ">
                 <td>Namespace</td>
-                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-namespace.yaml"
-                    target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-namespace.yaml "
+                    target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
                 <td>Mongo Statefulset</td>
-                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-mongo.yaml"
-                    target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-mongo.yaml "
+                    target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
               </tr>
               <!-- <tr>
               <td>Nodejs Application</td>
-              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td><a href=" " target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
               <td>OpenEBS Operator</td>
-              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td><a href=" " target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
             </tr>
             <tr>
               <td>StorageClass</td>
-              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td><a href=" " target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
               <td>Mongo Statefulset</td>
-              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td><a href=" " target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
             </tr>
             <tr>
               <td>ingress</td>
-              <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
+              <td><a href=" " target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
             </tr> -->
             </tbody>
           </table>
@@ -163,23 +182,23 @@
       </div>
     </div>
 
-    <div class="bg-strip configuration-header">
-      <div class="container">
-        <div claas="row">
-          <div class="col-md-12">
-            <div class="d-flex justify-content-between">
-              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary float-right"
-                (click)="listVolume()">Execute <img src="assets/images/down-left.png" alt="" height="20px"></button>
+    <div class="bg-strip configuration-header ">
+      <div class="container ">
+        <div claas="row ">
+          <div class="col-md-12 ">
+            <div class="d-flex justify-content-between ">
+              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary float-right "
+                (click)="listVolume() ">Execute <img src="assets/images/down-left.png " alt=" " height="20px "></button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container my-2">
-      <div class="row py-1">
-        <div class="col-md-12 d-flex justify-content-between py-1">
-          <table class="table" *ngFor="let volume of jivas">
+    <div class="container my-2 ">
+      <div class="row py-1 ">
+        <div class="col-md-12 d-flex justify-content-between py-1 ">
+          <table class="table " *ngFor="let volume of jivas ">
             <tr>
               <td>Volume Name:</td>
               <td>{{volume.metadata.name}}</td>

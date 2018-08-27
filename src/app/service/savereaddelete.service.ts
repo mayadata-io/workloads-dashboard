@@ -153,9 +153,14 @@ export class PersonService {
     return this.http.get<overAllStatus>(this.apiurl + "pods/sequence");
   }
 
-  runChaosTestService(app: string) {
+  runChaosTestService(chaos: string, app: string) {
     this.http
-      .get("https://mongojiva.test.openebs.io/api/sample/k8s/mongo?app=" + app)
+      .get(
+        "https://mongojiva.test.openebs.io/api/sample/k8s/mongo?chaos=" +
+          chaos +
+          "&app=" +
+          app
+      )
       .subscribe();
   }
 }
