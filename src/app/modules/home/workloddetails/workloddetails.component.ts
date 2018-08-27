@@ -43,6 +43,37 @@ export class WorkloddetailsComponent implements OnInit {
   public runningStatus = false;
   public failledStatus = false;
   public unknownStatus = false;
+  public alphabet = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z"
+  ];
+  public randomString1 = " ";
+  public randomString2 = " ";
+  public randomnumber: number;
   public getstatus;
   public getmessage;
   public poststatus;
@@ -57,6 +88,25 @@ export class WorkloddetailsComponent implements OnInit {
     //   this.jivas = this.jivaDetail.data.items;
     //   // console.log(this.jivaDetail.data.items[0]);
     // });
+
+    // console.log("init started.. ");
+    for (let j = 0; j < 100; j++) {
+      for (let i = 0; i < 10; i++) {
+        this.randomString1 =
+          this.randomString1 + this.alphabet[Math.floor(Math.random() * 25)];
+        this.randomString2 =
+          this.randomString2 + this.alphabet[Math.floor(Math.random() * 25)];
+      }
+      this.randomnumber = Math.floor(Math.random() * 10000000);
+      this.personDetails.push({
+        rNumber: this.rnumber,
+        name: this.randomString1,
+        email: this.randomString2,
+        age: this.randomnumber
+      });
+      this.randomString1 = " ";
+      this.randomString2 = " ";
+    }
 
     timer(0, 10000).subscribe(x => {
       this.personService.getPodDetails().subscribe(res => {
