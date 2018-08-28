@@ -106,7 +106,8 @@
                   <div>
                     <select class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)" style="width:180px;">
                       <option selected value="">Select Chaos..</option>
-                      <option *ngFor="let chaosTest of chaosTests " value="{{chaosTest}} "> {{chaosTest}} </option>
+                      <option *ngFor="let chaosTest of chaosTests;" value="{{chaosTest}} "> {{chaosTest}}
+                      </option>
                     </select>
                   </div>
                   <div style="padding-left: 20px; ">

@@ -156,10 +156,10 @@ export class PersonService {
   runChaosTestService(chaos: string, app: string) {
     this.http
       .get(
-        "https://mongojiva.test.openebs.io/api/sample/k8s/mongo?chaos=" +
-          chaos +
-          "&app=" +
-          app
+        "https://mongojiva.test.openebs.io/api/sample/k8s/mongo?app=" +
+          app +
+          "&chaos=" +
+          chaos
       )
       .subscribe();
   }
