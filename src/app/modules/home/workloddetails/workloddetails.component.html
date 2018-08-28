@@ -39,7 +39,7 @@
                   ngbTooltip="{{jivaContrller.name}}">cntl</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
-            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
+            'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed' || jivaContrller.status === 'Terminating',
             'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
           }"></i>
               </p>
@@ -111,7 +111,8 @@
                     </select>
                   </div>
                   <div style="padding-left: 20px; ">
-                    <button class="btn btn-pill btn-secondary action-button btn-sm " (click)="runChaosTest(selectedChaos, selectedApplication) ">
+                    <button class="btn btn-pill btn-secondary action-button btn-sm" [disabled]="selectedChaos == '' || selectedApplication == ''"
+                      (click)="runChaosTest(selectedChaos, selectedApplication) ">
                       Go </button>
                   </div>
                 </div>
@@ -123,7 +124,7 @@
                 <div>
                   <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)" style="width:180px;">
                     <option selected value="">Select Application..</option>
-                    <option *ngFor="let statefulset of statefullSets" value="{{statefulset.name}} "> {{statefulset.name}}
+                    <option *ngFor="let statefulset of statefullApplications" value="{{statefulset.name}} "> {{statefulset.name}}
                     </option>
                   </select>
                 </div>
