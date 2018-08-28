@@ -40,6 +40,7 @@ export class PersonService {
     // }
     this.apiurl = 'http://20.10.222.200:12345/'
    
+   
   }
 
   getPosts() {
