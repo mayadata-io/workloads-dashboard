@@ -1,17 +1,17 @@
 <!-- <app-iframemodal></app-iframemodal> -->
-<div class="bg-strip workload-header">
+<!-- <div class="bg-strip workload-header">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <ul class="d-flex align-items-center">
-          <li><img src="assets/images/mongodb-logo.png" alt="">Mongo 3.1</li>
+          <li><img src="assets/images/mongodb-logo.png" alt="">Mongo: Latest</li>
           <li><img src="assets/images/mule-without-tagline.png" alt="">{{openebsversion}}</li>
-          <li><img src="assets/images/k8s.png" alt="">Namespace:{{namespace}}</li>
+          <li><img src="assets/images/k8s.png" alt="">Namespace: {{statefullSets[0].namespace}}</li>
         </ul>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="container">
   <div class="row">
@@ -19,7 +19,7 @@
       <div class="workload-deatils" *ngFor="let pvc of pvcarray">
         <div *ngFor="let statefulset of statefullSets">
           <p *ngIf="statefulset.pvc === pvc.name ">
-            <img src="assets/images/mongodb-logo.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}"> {{statefulset.name}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span> <i style="margin-left:5px"
+            <img src="assets/images/mongodb-logo.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}"> {{statefulset.name}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.nodeName}}</span> <i style="margin-left:5px"
               class="float-right fas" [ngClass]="{
           'fa-check text-success':statefulset.status === 'Running',   
           'fa-times text-danger':statefulset.status === 'Pending' || statefulset.status === 'Failed',
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<div class="bg-strip configuration-header">
+<!-- <div class="bg-strip configuration-header">
   <div class="container">
     <div claas="row">
       <div class="col-md-12">
@@ -62,8 +62,8 @@
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="Configurations">
   <div class="container">
     <div class="row">
@@ -76,7 +76,7 @@
               <td>Mongo Statefulset</td>
               <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-mongo.yaml" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td>Nodejs Application</td>
               <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
               <td>OpenEBS Operator</td>
@@ -91,14 +91,14 @@
             <tr>
               <td>ingress</td>
               <td><a href="" target="_blank"> <button class="btn btn-secondary"><i class="fas fa-cog"></i> View</button></a></td>
-            </tr> -->
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="bg-strip configuration-header">
+  <!-- <div class="bg-strip configuration-header">
     <div class="container">
       <div claas="row">
         <div class="col-md-12">
@@ -137,4 +137,4 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> -->
