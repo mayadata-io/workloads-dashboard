@@ -45,6 +45,7 @@ export class WorkloddetailsComponent implements OnInit {
   public unknownStatus = false;
   public chaosTests = [
     "Kill OpenEBS Replica",
+    "Kill Application Pod",
     "Increase Latency Between App and Replicas"
   ];
   public selectedChaos = "";
@@ -234,8 +235,17 @@ export class WorkloddetailsComponent implements OnInit {
     // console.log(chaos);
     // console.log(app);
     if (chaos != "" && app != "") {
+      for (let i = 0; i < this.chaosTests.length; i++) {
+        // console.log(chaos);
+        // console.log(this.chaosTests[i]);
+        if (chaos.trim() == this.chaosTests[i]) {
+          chaos = i.toString();
+          // console.log(this.chaosURLAttribute);
+          break;
+        }
+      }
       // console.log("inside");
-      this.personService.runChaosTestService(chaos, app);
+      this.personService.runChaosTestService(chaos, app.trim());
     }
   }
 }
