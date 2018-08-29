@@ -29,7 +29,7 @@ export class PersonService {
     this.host = window.location.host;
     console.log(window.location);
     if (this.host == "localhost:4200") {
-      this.apiurl = "http://localhost:3000/";
+      this.apiurl = "https://mongojiva.test.openebs.io/api/";
       console.log(this.host);
     } else if (window.location.host == "mongojiva.test.openebs.io") {
       this.apiurl = "https://mongojiva.test.openebs.io/api/";
