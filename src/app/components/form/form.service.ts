@@ -18,7 +18,7 @@ export class FormService {
     this.host = window.location.host;
     console.log(window.location);
     if(this.host == 'localhost:4200'){
-      this.apiurl ='https://mongojiva.test.openebs.io/api/';
+      this.apiurl ='http://localhost:3000/';
       console.log(this.host);
     }
     else if((window.location.host) == 'mongojiva.test.openebs.io'){
