@@ -34,6 +34,7 @@ export class WorkloddetailsComponent implements OnInit {
   public getResponses: getResponse[] = [];
   public personDetails: personDetail[] = [];
   public pvc: pvc[] = [];
+  public statefullApplications: statefulSet[] = [];
   public pvctemp;
   public pvcarray;
   public namespace = "";
@@ -121,7 +122,7 @@ export class WorkloddetailsComponent implements OnInit {
       $(".hide-custom").hide();
     }
 
-    timer(0, 5000).subscribe(x => {
+    timer(0, 3000).subscribe(x => {
       this.personService.getPodDetails().subscribe(res => {
         console.log(res);
         this.statefullSets = res.statefulSet;
@@ -132,6 +133,10 @@ export class WorkloddetailsComponent implements OnInit {
         this.pvctemp = res.pvc;
         this.pvcarray = this.pvctemp.pvc;
         console.log(this.pvcarray);
+
+        if (!this.isEqual(res.statefulSet, this.statefullApplications)) {
+          this.statefullApplications = res.statefulSet;
+        }
 
         // this.jivaReplicas.forEach(function(replica) {
         //   if (replica.status == "Terminating") {
@@ -216,8 +221,32 @@ export class WorkloddetailsComponent implements OnInit {
     );
   }
 
+  // To check whether two array of objects are equal, having comparison with attribute pvc
+  public isEqual(arr1, arr2) {
+    if (arr1.length != arr2.length) {
+      return false;
+    }
+
+    let set = new Set();
+    arr1.forEach(function(value) {
+      set.add(value.pvc);
+    });
+    arr2.forEach(function(value) {
+      if (!set.has(value.pvc)) {
+        return false;
+      } else {
+        set.delete(value.pvc);
+      }
+    });
+
+    if (set.size != 0) {
+      return false;
+    }
+
+    return true;
+  }
+
   public onChaosSelect(chaosValue) {
-    // console.log(chaosValue);
     this.selectedChaos = chaosValue;
     if (this.selectedChaos != "") {
       $(".hide-custom").show();
@@ -232,19 +261,13 @@ export class WorkloddetailsComponent implements OnInit {
   }
 
   public runChaosTest(chaos: string, app: string) {
-    // console.log(chaos);
-    // console.log(app);
     if (chaos != "" && app != "") {
       for (let i = 0; i < this.chaosTests.length; i++) {
-        // console.log(chaos);
-        // console.log(this.chaosTests[i]);
         if (chaos.trim() == this.chaosTests[i]) {
           chaos = i.toString();
-          // console.log(this.chaosURLAttribute);
           break;
         }
       }
-      // console.log("inside");
       this.personService.runChaosTestService(chaos, app.trim());
     }
   }
