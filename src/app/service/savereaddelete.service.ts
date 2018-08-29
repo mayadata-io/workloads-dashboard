@@ -28,19 +28,15 @@ export class PersonService {
   constructor(private http: HttpClient) {
     this.host = window.location.host;
     console.log(window.location);
-    // if(this.host == 'localhost:4200'){
-    //   this.apiurl ='http://localhost:3000/';
-    //   console.log(this.host);
-    // }
-    // else if((window.location.host) == 'mongojiva.test.openebs.io'){
-    //   this.apiurl ='https://mongojiva.test.openebs.io/api/';
-    // }else{
-    //   this.apiurl ='https://mongojiva.test.openebs.io/api/';
-    //   console.log(this.host);
-    // }
-    this.apiurl = 'http://20.10.222.200:12345/'
-   
-   
+    if (this.host == "localhost:4200") {
+      this.apiurl = "http://localhost:3000/";
+      console.log(this.host);
+    } else if (window.location.host == "mongojiva.test.openebs.io") {
+      this.apiurl = "https://mongojiva.test.openebs.io/api/";
+    } else {
+      this.apiurl = "https://mongojiva.test.openebs.io/api/";
+      console.log(this.host);
+    }
   }
 
   getPosts() {
