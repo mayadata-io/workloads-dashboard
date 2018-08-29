@@ -11,6 +11,6 @@ services:
 script:
 - ng build --prod
 after_success:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=mayadata/www-mongo-jiva-test-openebs;
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" != "false" ]; then export REPO=mayadata/www-mongo-jiva-test-openebs;
    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
   fi
