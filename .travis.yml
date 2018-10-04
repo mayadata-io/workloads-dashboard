@@ -32,6 +32,6 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "prometheus-cstor" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/prometheus-cstor-dashboard;
    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
   fi
-- if [ "$TRAVIS_BRANCH" = "wordpress-cstor" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/wordpress-cstor-dashboard;
+- if [ "$TRAVIS_BRANCH" = "wordpress--nfs-jiva" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=inyee/wordpress-cstor-dashboard;
    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO; 
   fi      
