@@ -6,6 +6,13 @@
           <li><img src="assets/images/workloads-logos/{{workloadName}}.png" alt="{{workloadName}}">{{workloadImage}}</li>
           <li><img src="assets/images/company-logos/mule-without-tagline.png" alt="openebs">{{openebsversion}}</li>
           <li><img src="assets/images/company-logos/k8s.png" alt="k8s">Namespace : {{namespace}}</li>
+          <li><img src="assets/images/workloads-logos/{{workloadName}}.png" alt="{{workloadName}}"> <a href="https://prometheusjiva-dashboard.openebs.ci/">Dasshboard</a>: {{overallStatus}}
+            <i style="margin-left:5px" class="float-right fas" [ngClass]="{
+              'fa-check text-success':overallStatus === 'Running',   
+              'fa-times text-danger':overallStatus === 'Pending' || overallStatus === 'Failed',
+              'fa-exclamation-triangle text-warning':overallStatus === 'Unknown'
+            }"></i>
+          </li>
         </ul>
       </div>
     </div>
