@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="d-flex align-items-center">
-          <li><img src="assets/images/workloads-logos/{{workloadName}}.svg" alt="{{workloadName}}">{{workloadImage}}</li>
+          <li><img src="assets/images/workloads-logos/{{workloadName}}.png" alt="{{workloadName}}">{{workloadImage}}</li>
           <li><img src="assets/images/company-logos/mule-without-tagline.png" alt="openebs">{{openebsversion}}</li>
           <li><img src="assets/images/company-logos/k8s.png" alt="k8s">Namespace : {{namespace}}</li>
         </ul>
@@ -30,7 +30,7 @@
           <div class="workload-deatils" *ngFor="let pvc of pvcarray">
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
-                <img src="assets/images/workloads-logos/{{workloadName}}.svg" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}">
+                <img src="assets/images/workloads-logos/{{workloadName}}.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}">
                   {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                 <i style="margin-left:5px" class="float-right fas" [ngClass]="{
               'fa-check text-success':statefulset.status === 'Running',   
@@ -42,7 +42,7 @@
             <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
               <p *ngIf="jivaContrller.pvc === pvc.name">
                 <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
-                  ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
+                  ngbTooltip="{{jivaContrller.name}}">ctrl</span> on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
             'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
@@ -72,39 +72,6 @@
       <div class="my-5">
         <table class="table action-table">
           <tbody>
-            <tr>
-              <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write Operations</span>
-              </td>
-              <td style="padding-left: 240px;">
-                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="save()">
-                  Go </button>
-              </td>
-              <td style="text-align: center;">
-                <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" ngbTooltip="{{postmessage}}" [ngClass]="{
-                          'btn-success':poststatus===200,
-                          'btn-danger':poststatus===500
-                        }">{{poststatus}}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read Operations</span>
-              </td>
-              <td style="padding-left: 240px;">
-                <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
-                  Go
-                </button>
-              </td>
-              <td style="text-align: center;">
-                <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" ngbTooltip="{{getmessage}}" [ngClass]="{
-                            'btn-success':getstatus===200,
-                            'btn-danger':getstatus===500
-                          }">{{getstatus}}
-                </div>
-              </td>
-            </tr>
             <tr>
               <td style="padding-left: 70px;"> Induce Chaos </td>
               <td style="padding-left: 55px;">
